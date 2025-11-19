@@ -68,13 +68,15 @@ def save_Embeddings(chunks, embeddings, output_prefix='search_index'):
     print(f"Saved embeddings to {output_prefix}_embeddings.npy")
     print(f"Saved chunks to {output_prefix}_chunks.json")
 
-chunks = load_Chunks(document_JSON)
 
-print(f"{len(chunks)} chunks loaded")
+def main():
+    chunks = load_Chunks(document_JSON)
 
-embeddings = generate_Embeddings(chunks)
+    print(f"{len(chunks)} chunks loaded")
 
-save_Embeddings(chunks, embeddings)
+    embeddings = generate_Embeddings(chunks)
 
-print("Done! :)")
+    save_Embeddings(chunks, embeddings)
+
+    print("Done! :)")
 

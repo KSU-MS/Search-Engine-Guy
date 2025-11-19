@@ -2,6 +2,8 @@
 
 ---
 
+<h2>General Stuff:</h2>
+
 Ok, so here's some vocab for this code so I don't have to make comments for every variable:
 
  *   chunks are what are thrown into "documents.json". each document is split into chunks
@@ -19,6 +21,11 @@ Now some notes:
 
 *   the team's formality and everyone's writing style varies so much that any AI that will
     summarize any of this is going to make mistakes. a lot of them
+---
+
+<h2>Usage:</h2>
+
+1. 
 
 ---
 

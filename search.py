@@ -115,7 +115,7 @@ def main():
     print("  - Type 'quit' or 'exit' to quit")
     print("  - Type 'config' to adjust settings")
     
-    top_k = 3
+    top_k = 6
     threshold = 0.3
     show_full_text = True
     

@@ -3,13 +3,9 @@ import os
 import extractText
 import json
 
-path = "/home/nick/Desktop/Projects/Formula-AI/Data/**"
+#path = "/home/nick/Desktop/Projects/Formula-AI/Data/**"
 
-files_and_directories = glob.glob(path, recursive=True)
-files = []
-json_file = "documents.json"
-
-def split_to_json(text, file, json_file ,chunk_size=256, overlap=25):
+def split_to_json(text, file, json_file, path, chunk_size=256, overlap=25):
     words = text.split()
     step = chunk_size - overlap
     chunks = []
@@ -32,9 +28,9 @@ def split_to_json(text, file, json_file ,chunk_size=256, overlap=25):
         if i + chunk_size >= len(words):
             break
 
-    append_to_json(json_file, chunks)
+    append_to_json(json_file, chunks, path)
 
-def append_to_json(json_file, chunks):
+def append_to_json(json_file, chunks, path):
     if not os.path.exists(json_file) or os.path.getsize(json_file) == 0:
         with open(json_file, "w", encoding="utf-8") as f:
             json.dump([], f)
@@ -47,12 +43,17 @@ def append_to_json(json_file, chunks):
     with open(json_file, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
-for entry in files_and_directories:
-    if os.path.isfile(entry):
-        files.append(entry)
+def main(path):
+    path = path + '/**'
+    files_and_directories = glob.glob(path, recursive=True)
+    files = []
+    json_file = "documents.json"
+    for entry in files_and_directories:
+        if os.path.isfile(entry):
+            files.append(entry)
 
-for file in files:
-    text = str(extractText.main(file))
-    split_to_json(text, file, json_file)
+    for file in files:
+        text = str(extractText.main(file))
+        split_to_json(text, file, json_file, path)
 
-print("done! :)")
+    print("Chunking Completed")
