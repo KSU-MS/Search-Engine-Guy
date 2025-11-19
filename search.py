@@ -104,7 +104,6 @@ class SemanticSearchEngine:
 
 def main():
     """Interactive search interface"""
-    # Initialize search engine
     engine = SemanticSearchEngine()
     
     print("\n" + "=" * 10)

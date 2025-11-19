@@ -18,7 +18,7 @@ def main(file, format = "text"):
             for page_number in range(1, total_pages + 1):
                 page = convert_from_path(
                     file,
-                    dpi=800,
+                    dpi=800, #the detail level that pdf's are processed at. 800 is fine for most small text while not being too ram intensive
                     first_page=page_number,
                     last_page=page_number
                 )[0]
@@ -29,7 +29,7 @@ def main(file, format = "text"):
                 print(f"Processed page {page_number}/{total_pages} of '{file}'")
 
             return "\n".join(file_contents)
-        elif format == "markdown":
+        elif format == "markdown": #un-implimented code to convert to markdown for easier llm usage
             markdown = pymupdf4llm.to_markdown(file)
             return "\n".join(markdown)
     else:
