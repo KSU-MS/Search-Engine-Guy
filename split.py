@@ -5,7 +5,7 @@ import json
 
 #path = "/home/nick/Desktop/Projects/Formula-AI/Data/**"
 
-def split_to_json(text, file, json_file, path, chunk_size=256, overlap=25):
+def split_to_json(text, file, json_file, path, chunk_size=150, overlap=45):
     words = text.split()
     step = chunk_size - overlap
     chunks = []
@@ -53,7 +53,7 @@ def main(path):
             files.append(entry)
 
     for file in files:
-        text = str(extractText.main(file))
+        text = str(extractText.main(file, "markdown"))
         split_to_json(text, file, json_file, path)
 
     print("Chunking Completed")

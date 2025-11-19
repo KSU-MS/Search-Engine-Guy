@@ -115,8 +115,8 @@ def main():
     print("  - Type 'quit' or 'exit' to quit")
     print("  - Type 'config' to adjust settings")
     
-    top_k = 6
-    threshold = 0.28
+    top_k = 8
+    threshold = 0.29
     show_full_text = True
     
     while True:
@@ -157,15 +157,17 @@ def main():
         results = engine.search(query, top_k=top_k, threshold=threshold)
         engine.print_results(results, show_full_text=show_full_text)
 
+        print("\n\n")
+
         message = random.randint(0,3)
         if message == 0:
-            print("Consulting the orb...")
+            print("Consulting the orb...\n")
         elif message == 1:
-            print("Asking the gods...")
+            print("Asking the gods...\n")
         elif message == 2:
-            print("Contacting John for an answer...")
+            print("Contacting John for an answer...\n")
         elif message == 3:
-            print("Fucking around and finding out...")
+            print("Fucking around and finding out...\n")
         elif message == 4:
             print("")
         

@@ -31,7 +31,7 @@ def main(file, format = "text"):
             return "\n".join(file_contents)
         elif format == "markdown": #un-implimented code to convert to markdown for easier llm usage
             markdown = pymupdf4llm.to_markdown(file)
-            return "\n".join(markdown)
+            return markdown
     else:
         print(f"unsupported file type '{kind.extension}'!")
         return "--unsupported file--"
