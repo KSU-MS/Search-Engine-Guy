@@ -4,21 +4,25 @@
 
 Ok, so here's some vocab for this code so I don't have to make comments for every variable:
 
- *   chunks are what are thrown into "documents.json". each document is split into chunks
+ *  Chunks are what are thrown into "documents.json". each document is split into chunks
     for faster searching.
 
-*   overlap is the amount of words at the end of one chunk that appear at the beginning of
+*   Overlap is the amount of words at the end of one chunk that appear at the beginning of
     another, this is an attempt to capture more context in oone chunk so that if an AI summarizes
     it, there's (hopefully) more info for it to go off of.
 
 Now some notes:
 
-*   yes i'm aware that json files arent the best option for storing an entire database of stuff,
+*   Yes i'm aware that json files arent the best option for storing an entire database of stuff,
     but i didnt want to learn mongo or some other bullshit so if you're mad about it, take
     the L.
 
-*   the team's formality and everyone's writing style varies so much that any AI that will
-    summarize any of this is going to make mistakes. a lot of them
+*   The team's formality and everyone's writing style varies so much that any AI that will
+    summarize any of this is going to make mistakes. A lot of them...
+
+*   Most of this code was written at ungodly times, so if I accidentally import the json module
+    twice or something, give me a break
+
 ---
 
 <h3>Usage:</h3>
@@ -35,11 +39,19 @@ Now some notes:
 
 ---
 
-insert witty/snarky comment here, creatively tell user to go fuck themselves
+<h3>Tips:</h3>
+
+1. You aren't asking an AI a question, you're using a search engine that then summarizes the results. Yes, there's a diffrence. Use this like Google. Instead of saying "Hey, what's the status of the rear wing on the ks9?" just type "ks9 rear wing status". 
+
+2. I'm still tuning the "accuracy:fill in the gaps of missing info" ratio. Lmk if you see something incorrect. 
+
+3. I can't stress this enough, this sites it's sources for a reason. PLEASE CHECK THEM if the data you're searching for is important. 
 
 ---
    
-Also most of this code was written at ungodly times, so if I accidentally import the json module
-twice or something, give me a break
+<h3>Contact me:</h3>
+If this starts being dumb, or if you get weird or incorrect results, contact me in the KSU Formula SAE Discord (@Nick) or on discord directly if somehow you found this useful outside of the formula team (@Nick75704). I'll have a better channel of contact at some point but yeah that's it for now. If I've graduated/ dropped out, I'm still happy to help with this, so don't hesitate to reach out. 
+
+---
 
 -Nick

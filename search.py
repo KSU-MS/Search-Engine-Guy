@@ -3,6 +3,7 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Any
 import ollama
+import random
 from ollama import chat
 
 
@@ -115,7 +116,7 @@ def main():
     print("  - Type 'config' to adjust settings")
     
     top_k = 6
-    threshold = 0.3
+    threshold = 0.28
     show_full_text = True
     
     while True:
@@ -155,6 +156,20 @@ def main():
         # Perform search
         results = engine.search(query, top_k=top_k, threshold=threshold)
         engine.print_results(results, show_full_text=show_full_text)
+
+        message = random.randint(0,3)
+        if message == 0:
+            print("Consulting the orb...")
+        elif message == 1:
+            print("Asking the gods...")
+        elif message == 2:
+            print("Contacting John for an answer...")
+        elif message == 3:
+            print("Fucking around and finding out...")
+        elif message == 4:
+            print("")
+        
+        print("(Generating Summary)")
 
         stream = chat(
             model='summaryModelFormula',
