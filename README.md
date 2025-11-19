@@ -25,7 +25,13 @@ Now some notes:
 
 <h2>Usage:</h2>
 
-1. this is a test to see if i set up github right...
+1. Run the "autoinstall.sh" file. If we're installing this on a non debian distro/windows then just copy the pip command and install the other dependencies as needed. 
+
+2. Edit "ingest.py" to include the directory of files to be ingested. Currently anything other than a .pdf is ignored. PLEASE seperate your data into the desired folders, thats part of how the search algorith works.
+
+3. Run "ingest.py" (this will take a while)
+
+4. Run "search.py" once ingest is finished.
 
 ---
 
