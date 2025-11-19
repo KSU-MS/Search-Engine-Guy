@@ -1,8 +1,6 @@
-<h3>Search Engine Guy Readme:</h3>
+<h2>Search Engine Guy Readme:</h2>
 
----
-
-<h2>General Stuff:</h2>
+<h3>General Stuff:</h3>
 
 Ok, so here's some vocab for this code so I don't have to make comments for every variable:
 
@@ -23,7 +21,7 @@ Now some notes:
     summarize any of this is going to make mistakes. a lot of them
 ---
 
-<h2>Usage:</h2>
+<h3>Usage:</h3>
 
 1. Run the "autoinstall.sh" file. If we're installing this on a non debian distro/windows then just copy the pip command and install the other dependencies as needed. 
 
