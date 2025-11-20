@@ -154,11 +154,11 @@ def main():
     print("=" * 10)
     print("\nCommands:")
     print("  - Type your query and press Enter to search")
-    print("  - Include 'ks[number]' in your query to filter by file (e.g., 'ks1 teaching methods')")
+    print("  - Include 'ks[number]' in your query to filter by file (e.g., 'ks9 aero summary')")
     print("  - Type 'quit' or 'exit' to quit")
     print("  - Type 'config' to adjust settings")
     
-    top_k = 6
+    top_k = 10
     threshold = 0.3
     show_full_text = True
     
