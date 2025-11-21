@@ -202,7 +202,7 @@ def main():
 
         print("\n\n")
 
-        message = random.randint(0,7)
+        message = random.randint(0,9)
         if message == 0:
             print("Consulting the orb...\n")
         elif message == 1:
@@ -219,13 +219,17 @@ def main():
             print("Freezing the stapler...\n")
         elif message == 7:
             print("Welding AIRs together...\n")
-      
+        elif message == 8:
+            print("Puncturing LiPos...\n")
+        elif message == 9:
+            print("Playing jenga with stock aluminum...\n")
         print("(Generating Summary)\n")
 
         stream = chat(
             model='summaryModelFormula2',
             messages=[{'role': 'user', 'content': f"Query: {query}, Document: {results}"}],
             stream=True,
+            # options=[{'main_gpu': '1'}],
         )
 
         for chunk in stream:
