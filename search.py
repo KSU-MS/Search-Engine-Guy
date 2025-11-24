@@ -158,7 +158,7 @@ def main():
     print("  - Type 'quit' or 'exit' to quit")
     print("  - Type 'config' to adjust settings")
     
-    top_k = 10
+    top_k = 6
     threshold = 0.3
     show_full_text = True
     
@@ -226,7 +226,7 @@ def main():
         print("(Generating Summary)\n")
 
         stream = chat(
-            model='summaryModelFormula2',
+            model='summaryModelFormula2:latest',
             messages=[{'role': 'user', 'content': f"Query: {query}, Document: {results}"}],
             stream=True,
             # options=[{'main_gpu': '1'}],
