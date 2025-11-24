@@ -29,7 +29,7 @@ def main(file, format = "text"):
                 print(f"Processed page {page_number}/{total_pages} of '{file}'")
 
             return "\n".join(file_contents)
-        elif format == "markdown": #un-implimented code to convert to markdown for easier llm usage
+        elif format == "markdown": #pretty much always use this, it's faster to chunk and yeilds better results for the llm
             markdown = pymupdf4llm.to_markdown(file)
             return markdown
     else:

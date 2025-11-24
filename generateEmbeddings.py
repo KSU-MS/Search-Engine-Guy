@@ -10,7 +10,7 @@ def load_Chunks (document_JSON):
         data = json.load(docs)
     return data
 
-def generate_Embeddings(chunks, model_name='all-MiniLM-L6-v2', batch_size=32):
+def generate_Embeddings(chunks, model_name='all-MiniLM-L6-v2', batch_size=64):
     """
     Generate embeddings for all chunks in 'documents.json'
     
