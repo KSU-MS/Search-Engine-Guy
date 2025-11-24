@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: ai-guy
+Version: 0.1.0
+Summary: send help
+Requires-Python: >=3.12
+Requires-Dist: filetype
+Requires-Dist: pytesseract
+Requires-Dist: pdf2image
+Requires-Dist: pymupdf4llm
+Requires-Dist: sentence-transformers
+Requires-Dist: numpy
+Requires-Dist: tk
+Requires-Dist: ollama
+Requires-Dist: pymupdf-layout
+Requires-Dist: opencv-python
+Requires-Dist: requests>=2.32.5
+Requires-Dist: flask
+Requires-Dist: flask_cors

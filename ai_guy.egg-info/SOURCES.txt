@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+ai_guy.egg-info/PKG-INFO
+ai_guy.egg-info/SOURCES.txt
+ai_guy.egg-info/dependency_links.txt
+ai_guy.egg-info/entry_points.txt
+ai_guy.egg-info/requires.txt
+ai_guy.egg-info/top_level.txt
+allthestuff/__init__.py
+allthestuff/app.py
+allthestuff/extractText.py
+allthestuff/generateEmbeddings.py
+allthestuff/ingest.py
+allthestuff/search.py
+allthestuff/split.py

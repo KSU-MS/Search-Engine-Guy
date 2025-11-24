@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Search Engine</title>
+    <style>
+        body {
+            font-family: Arial, Verdana, sans-serif;
+            background-color: #c0c0c0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #000080;
+            color: #ffffff;
+            padding: 10px;
+            border-bottom: 2px solid #000000;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 12px;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        fieldset {
+            border: 2px groove #d3d3d3;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 5px;
+        }
+
+        .search-box {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            border: 2px inset #d3d3d3;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 6px 20px;
+            background-color: #d3d3d3;
+            border: 2px outset #d3d3d3;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:active {
+            border-style: inset;
+        }
+
+        .control-row {
+            margin-bottom: 15px;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #808080;
+        }
+
+        .control-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 200px;
+        }
+
+        .control-value {
+            display: inline-block;
+            width: 60px;
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 2px 5px;
+            font-family: "Courier New", monospace;
+        }
+
+        input[type="range"] {
+            width: 300px;
+            vertical-align: middle;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .result-item {
+            border: 2px groove #d3d3d3;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f5f5f5;
+        }
+
+        .result-header {
+            background-color: #000080;
+            color: #ffffff;
+            padding: 5px;
+            margin: -10px -10px 10px -10px;
+            font-weight: bold;
+        }
+
+        .result-number {
+            font-size: 16px;
+        }
+
+        .similarity-score {
+            float: right;
+            background-color: #ffff00;
+            color: #000000;
+            padding: 2px 8px;
+            border: 1px solid #000000;
+        }
+
+        .result-metadata {
+            font-size: 12px;
+            color: #000080;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .result-text {
+            background-color: #ffffff;
+            border: 1px solid #808080;
+            padding: 10px;
+            font-family: "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .status {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: #808080;
+        }
+
+        .summary-section {
+            margin-bottom: 20px;
+        }
+
+        .summary-box {
+            border: 2px groove #d3d3d3;
+            padding: 10px;
+            background-color: #ffffcc;
+        }
+
+        .summary-header {
+            background-color: #008080;
+            color: #ffffff;
+            padding: 5px 10px;
+            margin: -10px -10px 10px -10px;
+            font-weight: bold;
+        }
+
+        .summary-content {
+            background-color: #ffffff;
+            border: 1px solid #808080;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1.6;
+            min-height: 60px;
+            white-space: pre-wrap;
+        }
+
+        .summary-status {
+            color: #808080;
+            font-style: italic;
+        }
+
+        .info-text {
+            font-size: 11px;
+            color: #808080;
+            margin-left: 210px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 2px groove #d3d3d3;
+            margin: 15px 0;
+        }
+
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .hourglass {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            position: relative;
+            animation: spin 2s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hourglass::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-image: url('data:image/svg+xml,%3Csvg width="16" height="16" xmlns="http://www.w3.org/2000/svg"%3E%3Crect x="2" y="0" width="12" height="2" fill="%23000"/%3E%3Crect x="2" y="2" width="2" height="4" fill="%23000"/%3E%3Crect x="12" y="2" width="2" height="4" fill="%23000"/%3E%3Crect x="4" y="2" width="8" height="2" fill="%23ff0"/%3E%3Crect x="6" y="4" width="4" height="1" fill="%23ff0"/%3E%3Crect x="7" y="6" width="2" height="4" fill="%23000"/%3E%3Crect x="2" y="10" width="2" height="4" fill="%23000"/%3E%3Crect x="12" y="10" width="2" height="4" fill="%23000"/%3E%3Crect x="4" y="12" width="8" height="2" fill="%23ff0"/%3E%3Crect x="2" y="14" width="12" height="2" fill="%23000"/%3E%3C/svg%3E');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .loading-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Semantic Search Engine v1.0</h1>
+            <p>AI-Powered Document Search System</p>
+        </div>
+
+        <div class="content">
+            <fieldset>
+                <legend>Search Query</legend>
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Enter search query..."
+                        onkeypress="if(event.key === 'Enter') performSearch()"
+                    />
+                    <button onclick="performSearch()">Search</button>
+                </div>
+                <div style="font-size: 11px; color: #808080; margin-bottom: 10px;">
+                    Tip: Include 'ks[number]' to filter by file (e.g., 'ks9 aero summary')
+                </div>
+                
+                <div class="control-row">
+                    <span class="control-label">Filter by Subfolder:</span>
+                    <select id="subfolderFilter" style="padding: 4px; border: 2px inset #d3d3d3; font-family: Arial, sans-serif; width: 300px;">
+                        <option value="">All Folders</option>
+                    </select>
+                </div>
+                
+                <div class="control-row">
+                    <span class="control-label">AI Model:</span>
+                    <select id="modelSelect" style="padding: 4px; border: 2px inset #d3d3d3; font-family: Arial, sans-serif; width: 300px;">
+                        <option value="summaryModelMedium:latest">Medium (Default)</option>
+                        <option value="summaryModelBig:latest">Big (Slower, More Detailed)</option>
+                        <option value="summaryModelSmall:latest">Small (Faster, Less Detail)</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Search Parameters</legend>
+                
+                <div class="control-row">
+                    <span class="control-label">Top K Results:</span>
+                    <input 
+                        type="range" 
+                        id="topKSlider" 
+                        min="1" 
+                        max="20" 
+                        value="6"
+                        oninput="updateTopK(this.value)"
+                    />
+                    <span class="control-value" id="topKValue">6</span>
+                    <div class="info-text">Number of results to return (1-20)</div>
+                </div>
+
+                <div class="control-row">
+                    <span class="control-label">Similarity Threshold:</span>
+                    <input 
+                        type="range" 
+                        id="thresholdSlider" 
+                        min="0" 
+                        max="100" 
+                        value="30"
+                        oninput="updateThreshold(this.value)"
+                    />
+                    <span class="control-value" id="thresholdValue">0.30</span>
+                    <div class="info-text">Minimum similarity score (0.00 - 1.00)</div>
+                </div>
+            </fieldset>
+
+            <hr>
+
+            <div id="summaryContainer"></div>
+
+            <div id="resultsContainer">
+                <div class="status">
+                    Enter a search query above to begin searching...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let topK = 6;
+        let threshold = 0.30;
+        let allSubfolders = [];
+        const API_URL = 'http://localhost:5000';
+
+        function updateTopK(value) {
+            topK = parseInt(value);
+            document.getElementById('topKValue').textContent = topK;
+        }
+
+        function updateThreshold(value) {
+            threshold = (parseInt(value) / 100).toFixed(2);
+            document.getElementById('thresholdValue').textContent = parseInt(value) + '%';
+        }
+
+        // Initialize display values on load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateTopK(6);
+            updateThreshold(30);
+        });
+
+        async function loadSubfolders() {
+            try {
+                const response = await fetch(`${API_URL}/api/subfolders`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    allSubfolders = data.subfolders;
+                    const select = document.getElementById('subfolderFilter');
+                    
+                    // Clear existing options except "All Folders"
+                    select.innerHTML = '<option value="">All Folders</option>';
+                    
+                    // Add subfolder options
+                    allSubfolders.forEach(folder => {
+                        const option = document.createElement('option');
+                        option.value = folder;
+                        option.textContent = folder;
+                        select.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading subfolders:', error);
+            }
+        }
+
+        async function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            const subfolderFilter = document.getElementById('subfolderFilter').value;
+            const resultsContainer = document.getElementById('resultsContainer');
+            const summaryContainer = document.getElementById('summaryContainer');
+
+            if (!query) {
+                resultsContainer.innerHTML = '<div class="status">Please enter a search query</div>';
+                summaryContainer.innerHTML = '';
+                return;
+            }
+
+            // Add subfolder filter to query if selected
+            let fullQuery = query;
+            if (subfolderFilter) {
+                fullQuery = `${query} folder:${subfolderFilter}`;
+            }
+
+            // Show loading state
+            resultsContainer.innerHTML = '<div class="status"><span class="hourglass"></span><span class="loading-text">Searching...</span></div>';
+            summaryContainer.innerHTML = '';
+
+            try {
+                const response = await fetch(`${API_URL}/api/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: fullQuery,
+                        top_k: topK,
+                        threshold: parseFloat(threshold)
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayResults(data.results, fullQuery);
+                    
+                    // Generate AI summary if we have results
+                    if (data.results.length > 0) {
+                        generateSummary(fullQuery, data.results);
+                    }
+                } else {
+                    resultsContainer.innerHTML = `<div class="status">Error: ${data.error || 'Unknown error'}</div>`;
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                resultsContainer.innerHTML = `<div class="status">Error connecting to server: ${error.message}<br><br>Make sure the Flask server is running on port 5000</div>`;
+            }
+        }
+
+        async function generateSummary(query, results) {
+            const summaryContainer = document.getElementById('summaryContainer');
+            const selectedModel = document.getElementById('modelSelect').value;
+            
+            // Create summary box
+            summaryContainer.innerHTML = `
+                <div class="summary-section">
+                    <div class="summary-box">
+                        <div class="summary-header">AI Summary</div>
+                        <div class="summary-content" id="summaryContent">
+                            <span class="summary-status"><span class="hourglass"></span><span class="loading-text">Generating summary...</span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const summaryContent = document.getElementById('summaryContent');
+
+            try {
+                const response = await fetch(`${API_URL}/api/generate_summary`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        results: results,
+                        model: selectedModel
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let summaryText = '';
+                let statusShown = false;
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    
+                    if (done) break;
+                    
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+                    
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = JSON.parse(line.substring(6));
+                            
+                            if (data.type === 'status') {
+                                summaryContent.innerHTML = `<span class="summary-status"><span class="hourglass"></span><span class="loading-text">${data.message}</span></span><br><br>`;
+                                statusShown = true;
+                            } else if (data.type === 'content') {
+                                if (statusShown) {
+                                    summaryContent.innerHTML = '';
+                                    statusShown = false;
+                                }
+                                summaryText += data.text;
+                                summaryContent.textContent = summaryText;
+                            } else if (data.type === 'error') {
+                                summaryContent.innerHTML = `<span style="color: red;">Error: ${data.message}</span>`;
+                            } else if (data.type === 'done') {
+                                // Summary complete
+                            }
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Summary generation error:', error);
+                summaryContent.innerHTML = `<span style="color: red;">Error generating summary: ${error.message}</span>`;
+            }
+        }
+
+        function displayResults(results, query) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<div class="status">No results found matching your criteria.<br>Try adjusting the threshold or broadening your search.</div>';
+                return;
+            }
+
+            let html = '<div class="results">';
+            html += `<div style="margin-bottom: 15px; font-weight: bold;">Search Results: ${results.length} documents found</div>`;
+            
+            results.forEach((result, index) => {
+                const chunk = result.chunk;
+                const metadata = [];
+                
+                // Build metadata string
+                if (typeof chunk === 'object') {
+                    for (let key in chunk) {
+                        if (key !== 'text') {
+                            metadata.push(`${key}: ${chunk[key]}`);
+                        }
+                    }
+                }
+                
+                const text = typeof chunk === 'object' ? (chunk.text || JSON.stringify(chunk)) : chunk;
+                
+                html += `
+                    <div class="result-item">
+                        <div class="result-header">
+                            <span class="result-number">Result #${index + 1}</span>
+                            <span class="similarity-score">Score: ${result.score.toFixed(4)}</span>
+                        </div>
+                        ${metadata.length > 0 ? `<div class="result-metadata">${metadata.join(' | ')}</div>` : ''}
+                        <div class="result-text">${escapeHtml(text)}</div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            resultsContainer.innerHTML = html;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Check server health on load
+        window.addEventListener('load', async () => {
+            try {
+                const response = await fetch(`${API_URL}/api/health`);
+                const data = await response.json();
+                console.log('Server health:', data);
+                
+                // Load subfolders after confirming server is up
+                await loadSubfolders();
+            } catch (error) {
+                console.warn('Could not connect to server:', error);
+            }
+        });
+    </script>
+</body>
+</html>

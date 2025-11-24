@@ -1,3 +1,0 @@
-pip install pyautogui pillow pytesseract
-
-https://github.com/tesseract-ocr/tesseract

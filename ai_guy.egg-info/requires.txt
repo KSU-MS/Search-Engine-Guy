@@ -1,0 +1,13 @@
+filetype
+pytesseract
+pdf2image
+pymupdf4llm
+sentence-transformers
+numpy
+tk
+ollama
+pymupdf-layout
+opencv-python
+requests>=2.32.5
+flask
+flask_cors

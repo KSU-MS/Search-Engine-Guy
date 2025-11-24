@@ -27,15 +27,17 @@ Now some notes:
 
 <h3>Usage:</h3>
 
-1. Run the "autoinstall.sh" file. If we're installing this on a non debian linux distro/windows then just copy the pip command and install the other dependencies as needed.
+1. Install "UV" for python
 
 2. Edit "ingest.py" to include the directory of files to be ingested. Currently anything other than a .pdf is ignored. PLEASE seperate your data into the desired folders, thats part of how the search algorith works.
 
 3. Clear the contents of "documents.json" and run "ingest.py" (this will take a while). Eventually I'll make it so only new content gets ingested but we're still in very early days of this project. 
 
-4. Run "search.py" once ingest is finished. On first run Ollama will need to download the base model for summaries (currently gemma3:12b), so depending on your internet connection that might also take a while.
+4. Run "uv run ingest" to begin ingest.
 
-5. Hope and pray to your higher power of choice that the code doesn't just work on my machine, but yours too. 
+5. Once ingest is finished, run "uv run ai-guy". On first run Ollama will need to download the base model for summaries (currently gemma3:27b), so depending on your internet connection that might also take a while.
+
+6. Hope and pray to your higher power of choice that the code doesn't just work on my machine, but yours too. Navigate to "localhost:5000" in a web browser and ask away... 
 
 ---
 
@@ -46,6 +48,10 @@ Now some notes:
 2. I'm still tuning the "accuracy:fill in the gaps of missing info" ratio. Lmk if you see something incorrect. 
 
 3. I can't stress this enough, this sites it's sources for a reason. PLEASE CHECK THEM if the data you're searching for is important. 
+
+4. TOP_K is a variable to show how many results to surface and refrence.
+
+5. THRESHOLD is a variable to specify how specific you need the search results to be. .30 (think 30%) is the default and works the nest in most cases, but this is adjustable. 
 
 ---
    

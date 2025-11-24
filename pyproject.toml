@@ -1,0 +1,29 @@
+[project]
+name = "ai-guy"
+version = "0.1.0"
+description = "send help"
+requires-python = ">=3.12"
+dependencies = [
+    "filetype",
+    "pytesseract",
+    "pdf2image",
+    "pymupdf4llm",
+    "sentence-transformers",
+    "numpy",
+    "tk",
+    "ollama",
+    "pymupdf-layout",
+    "opencv-python",
+    "requests>=2.32.5",
+    "flask",
+    "flask_cors",
+
+]
+
+[project.scripts]
+ai-guy = "allthestuff.app:main"
+ingest = "allthestuff.ingest:main"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
