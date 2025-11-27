@@ -8,7 +8,7 @@ Ok, so here's some vocab for this code so I don't have to make comments for ever
     for faster searching.
 
 *   Overlap is the amount of words at the end of one chunk that appear at the beginning of
-    another, this is an attempt to capture more context in oone chunk so that if an AI summarizes
+    another, this is an attempt to capture more context in one chunk so that if an AI summarizes
     it, there's (hopefully) more info for it to go off of.
 
 Now some notes:
