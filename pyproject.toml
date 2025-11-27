@@ -17,16 +17,11 @@ dependencies = [
     "requests>=2.32.5",
     "flask",
     "flask_cors",
-
 ]
 
-[tool.setuptools]
-packages = ["allthestuff"]
-
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 include = ["allthestuff*"]
-exclude = ["Data*", "src*", "build*", "ai_guy.egg-info*"]
 
 [project.scripts]
 ai-guy = "allthestuff.app:main"
