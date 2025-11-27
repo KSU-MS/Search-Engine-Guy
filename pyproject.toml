@@ -22,11 +22,6 @@ dependencies = [
 [tool.setuptools]
 packages = ["allthestuff"]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["allthestuff*"]
-exclude = ["Data*", "build*", "ai_guy.egg-info*"]
-
 [project.scripts]
 ai-guy = "allthestuff.app:main"
 ingest = "allthestuff.ingest:main"
