@@ -29,7 +29,7 @@ Now some notes:
 
 1. Install "UV" for python
 
-2. Edit "ingest.py" to include the directory of files to be ingested. Currently anything other than a .pdf is ignored. PLEASE seperate your data into the desired folders, thats part of how the search algorith works.
+2. Edit "ingest.py" to include the directory of files to be ingested. Currently anything other than a .pdf is ignored. PLEASE seperate your data into the desired folders, thats part of how the search algorithm works.
 
 3. Clear the contents of "documents.json" and run "ingest.py" (this will take a while). Eventually I'll make it so only new content gets ingested but we're still in very early days of this project. 
 

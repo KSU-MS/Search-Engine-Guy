@@ -11,7 +11,7 @@ import re
 class SemanticSearchEngine:
     def __init__(self, embeddings_file='search_index_embeddings.npy', 
                  chunks_file='search_index_chunks.json',
-                 model_name='all-MiniLM-L6-v2'):
+                 model_name='Qwen/Qwen3-Embedding-4B'):
         """
         Initialize the search engine
         

@@ -1,3 +1,6 @@
+'''
+So I had Claude fix an issue and it went ahead and commented the code too. oops...
+'''
 from pdf2image import convert_from_path
 import pytesseract
 import filetype
@@ -52,7 +55,7 @@ def ocr_page(args):
 # -----------------------------
 # Main Extract Function
 # -----------------------------
-def main(file, format="text", workers=None, dpi_text=700, dpi_md=600):
+def main(file, format="text", workers=None, dpi_text=800, dpi_md=800):
     """
     file: path to PDF
     format: "text" or "markdown"

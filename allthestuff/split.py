@@ -5,7 +5,7 @@ import json
 
 #path = "/home/nick/Desktop/Projects/Formula-AI/Data/**"
 
-def split_to_json(text, file, json_file, path, chunk_size=200, overlap=50):
+def split_to_json(text, file, json_file, path, chunk_size=50, overlap=10):
     words = text.split()
     step = chunk_size - overlap
     chunks = []

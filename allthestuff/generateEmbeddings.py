@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer
 import json
 import numpy as np
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
+model = SentenceTransformer("Qwen/Qwen3-Embedding-4B")
 document_JSON = "documents.json"
 
 def load_Chunks (document_JSON):
@@ -10,7 +10,7 @@ def load_Chunks (document_JSON):
         data = json.load(docs)
     return data
 
-def generate_Embeddings(chunks, model_name='all-MiniLM-L6-v2', batch_size=64):
+def generate_Embeddings(chunks, model_name='Qwen/Qwen3-Embedding-4B', batch_size=64):
     """
     Generate embeddings for all chunks in 'documents.json'
     
