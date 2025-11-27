@@ -20,6 +20,9 @@ dependencies = [
 
 ]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project.scripts]
 ai-guy = "allthestuff.app:main"
 ingest = "allthestuff.ingest:main"
