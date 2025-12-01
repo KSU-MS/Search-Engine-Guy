@@ -276,10 +276,10 @@
                 
                 <div class="control-row">
                     <span class="control-label">AI Model:</span>
-                    <select id="modelSelect" style="padding: 4px; border: 2px inset #d3d3d3; font-family: Arial, sans-serif; width: 300px;">
-                        <option value="summaryModelMedium:latest">Medium (Default)</option>
-                        <option value="summaryModelBig:latest">Big (Slower, More Detailed)</option>
-                        <option value="summaryModelSmall:latest">Small (Faster, Less Detail)</option>
+                    <select id="modelSelect" style="padding: 4px; border: 2px inset #d3d3d3; font-family: Arial, sans-serif; width: 300px;" onchange="updateModelLimit()">
+                        <option value="summaryModelMedium:latest">Medium (Default - Max 50 results)</option>
+                        <option value="summaryModelBig:latest">Big (Slower, More Detailed - Max 80 results)</option>
+                        <option value="summaryModelSmall:latest">Small (Faster, Less Detail - Max 20 results)</option>
                     </select>
                 </div>
             </fieldset>
@@ -293,12 +293,12 @@
                         type="range" 
                         id="topKSlider" 
                         min="1" 
-                        max="20" 
+                        max="50" 
                         value="6"
                         oninput="updateTopK(this.value)"
                     />
                     <span class="control-value" id="topKValue">6</span>
-                    <div class="info-text">Number of results to return (1-20)</div>
+                    <div class="info-text">Number of results to return (varies by model)</div>
                 </div>
 
                 <div class="control-row">
@@ -334,6 +334,29 @@
         let allSubfolders = [];
         const API_URL = 'http://localhost:5000';
 
+        // Model-specific max limits
+        const MODEL_LIMITS = {
+            'summaryModelSmall:latest': 20,
+            'summaryModelMedium:latest': 50,
+            'summaryModelBig:latest': 80
+        };
+
+        function updateModelLimit() {
+            const selectedModel = document.getElementById('modelSelect').value;
+            const maxLimit = MODEL_LIMITS[selectedModel];
+            const topKSlider = document.getElementById('topKSlider');
+            
+            // Update slider max value
+            topKSlider.max = maxLimit;
+            
+            // If current value exceeds new limit, reduce it
+            if (topK > maxLimit) {
+                topK = maxLimit;
+                topKSlider.value = maxLimit;
+                document.getElementById('topKValue').textContent = maxLimit;
+            }
+        }
+
         function updateTopK(value) {
             topK = parseInt(value);
             document.getElementById('topKValue').textContent = topK;
@@ -348,6 +371,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateTopK(6);
             updateThreshold(30);
+            updateModelLimit(); // Set initial model limit
         });
 
         async function loadSubfolders() {

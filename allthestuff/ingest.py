@@ -11,7 +11,7 @@ def main():
     
     print("Beginnning Ingest...")
 
-    data_dir = '/home/nick/Desktop/Projects/Formula-AI/Data' 
+    data_dir = '../Data' 
 
     split.main(data_dir)
     generateEmbeddings.main()
